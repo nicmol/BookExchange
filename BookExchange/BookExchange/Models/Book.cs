@@ -8,6 +8,7 @@ namespace BookExchange.Models
 {
     public class Book
     {
+        
         public int BookId { get; set; }
         [Required]
         public string Title { get; set; }
