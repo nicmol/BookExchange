@@ -6,7 +6,12 @@ a.navbar-brand {
   text-align: center;
   word-break: break-all;
 }
-
+/*set background image*/
+body {
+    background-image: url('/images/bookshelf.png');
+    background-size: cover;
+    /*opacity: 0.5;*/
+}
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
