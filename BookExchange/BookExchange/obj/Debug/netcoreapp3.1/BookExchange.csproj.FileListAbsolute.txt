@@ -358,3 +358,9 @@ C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\ob
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\BookExchange.csproj.CopyComplete
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\BookExchange.dll
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\BookExchange.pdb
+C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Login.cshtml.g.cs
+C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Logout.cshtml.g.cs
+C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Register.cshtml.g.cs
+C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\_ViewImports.cshtml.g.cs
+C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
