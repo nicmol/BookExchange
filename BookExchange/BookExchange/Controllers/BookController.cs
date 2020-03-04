@@ -19,13 +19,13 @@ namespace BookExchange.Controllers
             _context = context;
         }
 
-        // GET: Book
+       
         public async Task<IActionResult> Index()
         {
             return View(await _context.Books.ToListAsync());
         }
 
-        // GET: Book/Details/5
+        
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,15 +43,13 @@ namespace BookExchange.Controllers
             return View(book);
         }
 
-        // GET: Book/Create
+       
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Book/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+     
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("BookId,Title,Author,Format,PubYear,Condition,ImageUrl")] Book book)
@@ -65,7 +63,7 @@ namespace BookExchange.Controllers
             return View(book);
         }
 
-        // GET: Book/Edit/5
+     
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,9 +79,7 @@ namespace BookExchange.Controllers
             return View(book);
         }
 
-        // POST: Book/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("BookId,Title,Author,Format,PubYear,Condition,ImageUrl")] Book book)
@@ -134,7 +130,7 @@ namespace BookExchange.Controllers
             return View(book);
         }
 
-        // POST: Book/Delete/5
+       
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -150,6 +146,6 @@ namespace BookExchange.Controllers
             return _context.Books.Any(e => e.BookId == id);
         }
 
-
+     
     }
 }
