@@ -5,6 +5,15 @@
     <UserSecretsId>aspnet-BookExchange-94165C93-16C7-4E84-B99A-A913B526787E</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20200307171110_Book5.cs" />
+    <Compile Remove="Data\Migrations\20200307171110_Book5.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200307171802_Book6.cs" />
+    <Compile Remove="Data\Migrations\20200307171802_Book6.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200307173123_Book7.cs" />
+    <Compile Remove="Data\Migrations\20200307173123_Book7.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.1" />

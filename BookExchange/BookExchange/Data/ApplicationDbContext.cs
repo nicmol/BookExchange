@@ -21,7 +21,8 @@ namespace BookExchange.Data
             UserManager<AppUser> userManager = serviceProvider.GetRequiredService<UserManager<AppUser>>();
             RoleManager<IdentityRole> roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             string username = configuration["Data:AdminUser:Name"];
-            string fullName = configuration["Data:AdminUser:FullName"];
+            string firstName = configuration["Data:AdminUser:FirstName"];
+            string lastName = configuration["Data:AdminUser:LastName"];
             string email = configuration["Data:AdminUser:Email"];
             string password = configuration["Data:AdminUser:Password"];
             string role = configuration["Data:AdminUser:Role"];
@@ -35,7 +36,8 @@ namespace BookExchange.Data
                 {
                     UserName = username,
                     Email = email,
-                    FullName = fullName
+                    FirstName = firstName,
+                    LastName = lastName
                 };
                 IdentityResult result = await userManager.CreateAsync(user, password);
                 if (result.Succeeded)

@@ -11,16 +11,22 @@ namespace BookExchange.Models
         
         public int BookId { get; set; }
         [Required]
-        public string Title { get; set; }
+        public String Title { get; set; }
         [Required]
-        public string Author { get; set; }
+        public String Author { get; set; }
         [Required]
-        public string Format { get; set; }
+        public String Format { get; set; }
         [Required]
         public DateTime PubYear { get; set; }
         [Required]
-        public string Condition { get; set; }
+        public String Condition { get; set; }
 
-        public string ImageUrl { get; set; }
+        public String ImageUrl { get; set; }
+
+        public AppUser appUser { get; set; }
+
+        public String appUserId { get; set; }
+
+      
     }
 }

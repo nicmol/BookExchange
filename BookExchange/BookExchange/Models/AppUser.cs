@@ -17,10 +17,17 @@ namespace BookExchange.Models
                 ImageUrl = "";
             }
         }
-        [Required(ErrorMessage = "You must enter a name")]
-        public string FullName {get; set; }
+        [Required(ErrorMessage = "You must enter a first name")]
+        public String FirstName {get; set; }
+        
+        [Required(ErrorMessage = "You must enter a last name")]
+        public String LastName { get; set; }
 
-        public string ImageUrl { get; set; }
+        public String ImageUrl { get; set; }
+
+        public ICollection<Book> Books { get; set; }
+
+        public String FullName { get { return LastName + "," + FirstName; } }
     }
 
 
