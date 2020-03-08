@@ -16,7 +16,10 @@ namespace BookExchange.Models
         public String Author { get; set; }
         [Required]
         public String Format { get; set; }
+        
         [Required]
+       
+        [DisplayFormat(DataFormatString = "{0:Y}", ApplyFormatInEditMode = true)]
         public DateTime PubYear { get; set; }
         [Required]
         public String Condition { get; set; }

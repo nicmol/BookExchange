@@ -178,6 +178,15 @@ C:\Users\nmolitor\source\repos\BookExchange\BookExchange\BookExchange\obj\Debug\
 C:\Users\nmolitor\source\repos\BookExchange\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\Razor\Views\Book\Details.cshtml.g.cs
 C:\Users\nmolitor\source\repos\BookExchange\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\Razor\Views\Book\Edit.cshtml.g.cs
 C:\Users\nmolitor\source\repos\BookExchange\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\Razor\Views\Book\Index.cshtml.g.cs
+C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\BookExchange.csprojAssemblyReference.cache
+C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\staticwebassets\BookExchange.StaticWebAssets.Manifest.cache
+C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\staticwebassets\BookExchange.StaticWebAssets.xml
+C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\BookExchange.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\BookExchange.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\BookExchange.RazorAssemblyInfo.cache
+C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\BookExchange.RazorAssemblyInfo.cs
+C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\BookExchange.AssemblyInfoInputs.cache
+C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\BookExchange.AssemblyInfo.cs
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
@@ -190,6 +199,7 @@ C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\bi
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\bin\Debug\netcoreapp3.1\BookExchange.pdb
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\bin\Debug\netcoreapp3.1\BookExchange.Views.dll
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\bin\Debug\netcoreapp3.1\BookExchange.Views.pdb
+C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\bin\Debug\netcoreapp3.1\Microsoft.AspNet.Identity.Core.dll
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
@@ -326,14 +336,6 @@ C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\bi
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\staticwebassets\BookExchange.StaticWebAssets.Manifest.cache
-C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\staticwebassets\BookExchange.StaticWebAssets.xml
-C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\BookExchange.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\BookExchange.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\BookExchange.RazorAssemblyInfo.cache
-C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\BookExchange.RazorAssemblyInfo.cs
-C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\BookExchange.AssemblyInfoInputs.cache
-C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\BookExchange.AssemblyInfo.cs
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\BookExchange.TagHelpers.input.cache
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\BookExchange.TagHelpers.output.cache
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\BookExchange.RazorCoreGenerate.cache
@@ -349,6 +351,7 @@ C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\ob
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\Razor\Views\Book\Details.cshtml.g.cs
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\Razor\Views\Book\Edit.cshtml.g.cs
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\Razor\Views\Book\Index.cshtml.g.cs
+C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\Razor\Views\Book\MyBooks.cshtml.g.cs
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs

@@ -27,7 +27,7 @@ namespace BookExchange.Models
 
         public ICollection<Book> Books { get; set; }
 
-        public String FullName { get { return LastName + "," + FirstName; } }
+        public String FullName { get { return LastName + ", " + FirstName; } }
     }
 
 

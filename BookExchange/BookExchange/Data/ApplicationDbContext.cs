@@ -1,4 +1,5 @@
 ﻿using BookExchange.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -12,9 +13,10 @@ namespace BookExchange.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+       
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-        public DbSet<Book> Books { get; set; }
+    public DbSet<Book> Books { get; set; }
 
         public static async Task CreateAdminAccount(IServiceProvider serviceProvider, IConfiguration configuration)
         {

@@ -9,17 +9,22 @@ using BookExchange.Data;
 using BookExchange.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BookExchange.Controllers
 {
 
     public class BookController : Controller
     {
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
         private readonly ApplicationDbContext _context;
 
-        public BookController(ApplicationDbContext context)
+        public BookController(ApplicationDbContext context, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _context = context;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         // GET: Book
@@ -50,6 +55,16 @@ namespace BookExchange.Controllers
             return View(book);
         }
 
+        //GET: Book/MyBooks
+        //public async Task<IActionResult> MyBooks() 
+        //{
+        //    var userName = User.Identity.Name;
+        //    var user = UserManager
+        //    //var books = _context.Books.Where(b => b.appUser);
+        //    return View(await books.ToListAsync());
+
+        //}
+
         // GET: Book/Create
         public IActionResult Create()
         {
@@ -62,10 +77,12 @@ namespace BookExchange.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookId,Title,Author,Format,PubYear,Condition,ImageUrl,appUserId")] Book book)
+        public async Task<IActionResult> Create([Bind("BookId,Title,Author,Format,PubYear,Condition,ImageUrl")] Book book)
         {
             if (ModelState.IsValid)
             {
+                var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
+                book.appUserId = currentUser.Id;
                 _context.Add(book);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

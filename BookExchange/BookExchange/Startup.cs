@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BookExchange.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace BookExchange
 {
@@ -21,6 +22,7 @@ namespace BookExchange
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+          
         }
 
         public IConfiguration Configuration { get; }
@@ -31,14 +33,13 @@ namespace BookExchange
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
             services.AddControllersWithViews();
             services.AddRazorPages();
 
             services.AddMvc();
-            
-
+                
 
         }
 
@@ -53,7 +54,6 @@ namespace BookExchange
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
