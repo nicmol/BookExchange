@@ -15,22 +15,19 @@ namespace BookExchange.Controllers
 
     public class BookController : Controller
     {
-        private UserManager<AppUser> userManager;
         private readonly ApplicationDbContext _context;
 
-        public BookController(ApplicationDbContext context, UserManager<AppUser> usrMgr)
+        public BookController(ApplicationDbContext context)
         {
             _context = context;
-            userManager = usrMgr;
         }
 
         // GET: Book
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Books.Include(b => b.appUser);
-            //ViewBag.userId = userManager
-            return View(await applicationDbContext.ToListAsync());
+            var books = _context.Books.Include(b => b.appUser);
+            return View(await books.ToListAsync());
 
         }
 

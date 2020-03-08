@@ -63,10 +63,9 @@
                 @Html.DisplayFor(modelItem => item.appUser.Id)
             </td>
             <td>
-                @*@if (item.appUserId == ) { }*@
-                <a asp-action="Edit" asp-route-id="@item.BookId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BookId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.BookId">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.BookId">Edit</a><span>|</span>
+                    <a asp-action="Details" asp-route-id="@item.BookId">Details</a> <span>|</span>
+                    <a asp-action="Delete" asp-route-id="@item.BookId">Delete</a>
             </td>
         </tr>
 }
