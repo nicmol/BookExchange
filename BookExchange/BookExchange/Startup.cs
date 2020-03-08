@@ -71,7 +71,7 @@ namespace BookExchange
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
-            //ApplicationDbContext.CreateAdminAccount(app.ApplicationServices, Configuration).Wait();
+            ApplicationDbContext.CreateAdminAccount(app.ApplicationServices, Configuration).Wait();
         }
     }
 }

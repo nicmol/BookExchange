@@ -25,7 +25,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Format" class="control-label"></label>
-                <input asp-for="Format" class="form-control" />
+                <select sp-for="Format" class="form-control">
+                    <option value="Hardcover">Hardcover</option>
+                    <option value="Paperback-MassMarket">Paperback-Mass Market</option>
+                    <option value="Paperback-Trade">Paberback-Trade</option>
+                    <option value="Large Print">Large Print</option>
+                </select>
                 <span asp-validation-for="Format" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -35,18 +40,18 @@
             </div>
             <div class="form-group">
                 <label asp-for="Condition" class="control-label"></label>
-                <input asp-for="Condition" class="form-control" />
+                <select asp-for="Condition" class="form-control">
+                    <option value="New">New</option>
+                    <option value="Used-Like New">Used-Like New</option>
+                    <option value="Used">Used</option>
+                    <option value="Used-Signs of Wear">Used-Signs of Wear/Writing</option>
+                </select>
                 <span asp-validation-for="Condition" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ImageUrl" class="control-label"></label>
                 <input asp-for="ImageUrl" class="form-control" />
                 <span asp-validation-for="ImageUrl" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="appUserId" class="control-label"></label>
-                <select asp-for="appUserId" class="form-control" asp-items="ViewBag.appUserId"></select>
-                <span asp-validation-for="appUserId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

@@ -56,14 +56,15 @@ namespace BookExchange.Controllers
         }
 
         //GET: Book/MyBooks
-        //public async Task<IActionResult> MyBooks() 
-        //{
-        //    var userName = User.Identity.Name;
-        //    var user = UserManager
-        //    //var books = _context.Books.Where(b => b.appUser);
-        //    return View(await books.ToListAsync());
+        public async Task<IActionResult> MyBooks()
+        {
+            var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
+            var currentUserId = currentUser.Id;
+            
+            var books = _context.Books.Include(b => b.appUser).Where(b => b.appUserId == currentUserId);
+            return View(await books.ToListAsync());
 
-        //}
+        }
 
         // GET: Book/Create
         public IActionResult Create()
@@ -113,7 +114,7 @@ namespace BookExchange.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BookId,Title,Author,Format,PubYear,Condition,ImageUrl,appUserId")] Book book)
+        public async Task<IActionResult> Edit(int id, [Bind("BookId,Title,Author,Format,PubYear,Condition,ImageUrl")] Book book)
         {
             if (id != book.BookId)
             {

@@ -28,7 +28,8 @@ namespace BookExchange.Data
             string email = configuration["Data:AdminUser:Email"];
             string password = configuration["Data:AdminUser:Password"];
             string role = configuration["Data:AdminUser:Role"];
-            if (await userManager.FindByNameAsync(username) == null)
+            var adminUser = await userManager.FindByNameAsync(username);
+            if (adminUser == null)
             {
                 if (await roleManager.FindByNameAsync(role) == null)
                 {

@@ -24,7 +24,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Format" class="control-label"></label>
-                <input asp-for="Format" class="form-control" />
+                <select sp-for="Format" class="form-control">
+                    <option value="Hardcover">Hardcover</option>
+                    <option value="Paperback-MassMarket">Paperback-Mass Market</option>
+                    <option value="Paperback-Trade">Paberback-Trade</option>
+                    <option value="Large Print">Large Print</option>
+                </select>
                 <span asp-validation-for="Format" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -33,8 +38,13 @@
                 <span asp-validation-for="PubYear" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Condition" class="control-label"></label>
-                <input asp-for="Condition" class="form-control" />
+                <label asp-for="Condition" class="control-label"></label>               
+                <select asp-for="Condition" class="form-control">
+                    <option value="New">New</option>
+                    <option value="Used-Like New">Used-Like New</option>
+                    <option value="Used">Used</option>
+                    <option value="Used-Signs of Wear">Used-Signs of Wear/Writing</option>
+                </select>
                 <span asp-validation-for="Condition" class="text-danger"></span>
             </div>
             <div class="form-group">
