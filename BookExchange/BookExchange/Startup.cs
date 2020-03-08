@@ -37,8 +37,9 @@ namespace BookExchange
             services.AddRazorPages();
 
             services.AddMvc();
+            
 
-          
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,6 +71,7 @@ namespace BookExchange
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+            ApplicationDbContext.CreateAdminAccount(app.ApplicationServices, Configuration).Wait();
         }
     }
 }
