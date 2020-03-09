@@ -11,6 +11,9 @@
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-controller="Book" asp-action="Index" title="Books">Book Listing</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-controller="Admin" asp-action="Index" title="Admin">Admin</a>
+            </li>
 
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
@@ -30,4 +33,5 @@
                 <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
             </li>
         }
+        
     </ul>
