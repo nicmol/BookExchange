@@ -92,7 +92,7 @@ namespace BookExchange.Controllers
                 string uniqueFileName = null;
                 if(model.Photo != null)
                 {
-                   string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "Images");
+                   string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "Images", "Uploads");
                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
                    string filePath =  Path.Combine(uploadsFolder, uniqueFileName);
                    model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));

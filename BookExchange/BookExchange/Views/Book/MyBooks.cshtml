@@ -39,7 +39,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-             var imagePath = "/Images/" + (item.ImageUrl ?? "OIP[1].jpg");
+             var imagePath = "/Images/Uploads/" + (item.ImageUrl ?? "OIP[1].jpg");
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Title)
