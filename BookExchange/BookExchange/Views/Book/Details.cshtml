@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Details";
 }
-@{ var imagePath = Model.ImageUrl;}
+@{ var imagePath = "/Images/" + (Model.ImageUrl ?? "OIP[1].jpg");}
 <h1>Details</h1>
 
 <div>
@@ -44,7 +44,7 @@
            Cover
         </dt>
         <dd class="col-sm-10">
-            <img src="@imagePath" />
+            <img src="@imagePath" class="imageDetail" />
         </dd>
         <dt class="col-sm-2">
             Owner

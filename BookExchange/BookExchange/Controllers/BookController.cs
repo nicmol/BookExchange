@@ -10,6 +10,9 @@ using BookExchange.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using BookExchange.ViewModels;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace BookExchange.Controllers
 {
@@ -19,16 +22,20 @@ namespace BookExchange.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public BookController(ApplicationDbContext context, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public BookController(ApplicationDbContext context, UserManager<AppUser> userManager,
+                                SignInManager<AppUser> signInManager, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
-        }
+            _webHostEnvironment = webHostEnvironment;
 
-        // GET: Book
-        [Authorize]
+    }
+
+    // GET: Book
+    [Authorize]
         public async Task<IActionResult> Index()
         {
             var books = _context.Books.Include(b => b.appUser);
@@ -78,18 +85,34 @@ namespace BookExchange.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookId,Title,Author,Format,PubYear,Condition,ImageUrl")] Book book)
+        public async Task<IActionResult> Create(CreateBookViewModel model)
         {
             if (ModelState.IsValid)
             {
+                string uniqueFileName = null;
+                if(model.Photo != null)
+                {
+                   string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "Images");
+                   uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+                   string filePath =  Path.Combine(uploadsFolder, uniqueFileName);
+                   model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                }
+                Book book = new Book
+                {
+                    Title = model.Title,
+                    Author = model.Author,
+                    Format = model.Format,
+                    PubYear = model.PubYear,
+                    Condition = model.Condition,
+                    ImageUrl = uniqueFileName
+                };
                 var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
                 book.appUserId = currentUser.Id;
                 _context.Add(book);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            ViewData["appUserId"] = new SelectList(_context.Set<AppUser>(), "Id", "Id", book.appUserId);
-            return View(book);
+            }                       
+            return View(model);
         }
 
         // GET: Book/Edit/5
