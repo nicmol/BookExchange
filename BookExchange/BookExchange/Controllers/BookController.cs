@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using BookExchange.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using BookExchange.Repositories;
 
 namespace BookExchange.Controllers
 {
@@ -23,24 +24,26 @@ namespace BookExchange.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
+                IBookRepository repo; //= new FakeMessageRepository();
+       
 
         public BookController(ApplicationDbContext context, UserManager<AppUser> userManager,
-                                SignInManager<AppUser> signInManager, IWebHostEnvironment webHostEnvironment)
+                                SignInManager<AppUser> signInManager, IWebHostEnvironment webHostEnvironment,
+                                IBookRepository r)
         {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _webHostEnvironment = webHostEnvironment;
-
-    }
+            repo = r;
+            
+        }
 
     // GET: Book
     [Authorize]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var books = _context.Books.Include(b => b.appUser);
-            return View(await books.ToListAsync());
-
+            return View(repo.Books);
         }
 
         // GET: Book/Details/5

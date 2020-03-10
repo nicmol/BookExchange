@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BookExchange.Models;
 using Microsoft.AspNetCore.Http;
+using BookExchange.Repositories;
 
 namespace BookExchange
 {
@@ -37,6 +38,7 @@ namespace BookExchange
                 .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddTransient<IBookRepository, BookRepository>();
 
             services.AddMvc();
                 
