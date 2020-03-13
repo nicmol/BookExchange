@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\nsm89\\OneDrive\\Documents\\296N\\Term project\\BookExchange\\BookExchange\\BookExchange.csproj": {}
+    "C:\\Users\\nmolitor\\Documents\\Term Project\\BookExchange\\BookExchange\\BookExchange.csproj": {}
   },
   "projects": {
-    "C:\\Users\\nsm89\\OneDrive\\Documents\\296N\\Term project\\BookExchange\\BookExchange\\BookExchange.csproj": {
+    "C:\\Users\\nmolitor\\Documents\\Term Project\\BookExchange\\BookExchange\\BookExchange.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nsm89\\OneDrive\\Documents\\296N\\Term project\\BookExchange\\BookExchange\\BookExchange.csproj",
+        "projectUniqueName": "C:\\Users\\nmolitor\\Documents\\Term Project\\BookExchange\\BookExchange\\BookExchange.csproj",
         "projectName": "BookExchange",
-        "projectPath": "C:\\Users\\nsm89\\OneDrive\\Documents\\296N\\Term project\\BookExchange\\BookExchange\\BookExchange.csproj",
-        "packagesPath": "C:\\Users\\nsm89\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nsm89\\OneDrive\\Documents\\296N\\Term project\\BookExchange\\BookExchange\\obj\\",
+        "projectPath": "C:\\Users\\nmolitor\\Documents\\Term Project\\BookExchange\\BookExchange\\BookExchange.csproj",
+        "packagesPath": "C:\\Users\\nmolitor\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\nmolitor\\Documents\\Term Project\\BookExchange\\BookExchange\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\nsm89\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nmolitor\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
