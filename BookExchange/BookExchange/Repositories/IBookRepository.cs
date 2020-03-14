@@ -16,6 +16,9 @@ namespace BookExchange.Repositories
         void UpdateBook(Book book);
 
         void DeleteBook(Book book);
+
+        List<Book> GetMyBooks(string appUserId);
+      
         
     }
     

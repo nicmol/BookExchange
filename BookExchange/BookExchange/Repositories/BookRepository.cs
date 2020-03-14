@@ -12,7 +12,7 @@ namespace BookExchange.Repositories
     {
         public BookRepository(ApplicationDbContext context)
         {
-            _context = context;
+            _context=context;
         }
         private readonly ApplicationDbContext _context;
 
@@ -29,11 +29,11 @@ namespace BookExchange.Repositories
             _context.Books.Add(Book);
             _context.SaveChanges();
         }
-                          
+
 
         public Book GetBookById(int bookId)
         {
-            Book book = Books.Find(b => b.BookId == bookId);
+            Book book = Books.Find(b => b.BookId==bookId);
             return book;
         }
 
@@ -43,10 +43,17 @@ namespace BookExchange.Repositories
             _context.SaveChanges();
         }
 
-       public void DeleteBook(Book book)
+        public void DeleteBook(Book book)
         {
             _context.Books.Remove(book);
-             _context.SaveChanges();
+            _context.SaveChanges();
+        }
+
+        public List<Book> GetMyBooks(string id)
+        {
+            var books = Books.Where(b => b.appUserId==id).ToList();
+            return books;
+
         }
     }
 }

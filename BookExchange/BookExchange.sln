@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookExchange", "BookExchange\BookExchange.csproj", "{DD646CD8-AF79-4970-9BC9-E63B44794FFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookExchange", "BookExchange\BookExchange.csproj", "{DD646CD8-AF79-4970-9BC9-E63B44794FFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitBookExchangeTestProject", "XUnitBookExchangeTestProject\XUnitBookExchangeTestProject.csproj", "{61DF376B-E860-406F-96C8-D7C40975DF43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{DD646CD8-AF79-4970-9BC9-E63B44794FFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD646CD8-AF79-4970-9BC9-E63B44794FFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD646CD8-AF79-4970-9BC9-E63B44794FFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61DF376B-E860-406F-96C8-D7C40975DF43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61DF376B-E860-406F-96C8-D7C40975DF43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61DF376B-E860-406F-96C8-D7C40975DF43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61DF376B-E860-406F-96C8-D7C40975DF43}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

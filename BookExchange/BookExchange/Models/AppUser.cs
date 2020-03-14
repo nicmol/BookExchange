@@ -28,6 +28,11 @@ namespace BookExchange.Models
         public ICollection<Book> Books { get; set; }
 
         public String FullName { get { return FirstName + " " + LastName; } }
+
+        public static implicit operator AppUser(string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 

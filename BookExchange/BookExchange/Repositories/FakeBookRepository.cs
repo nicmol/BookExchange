@@ -8,45 +8,54 @@ using System.Threading.Tasks;
 
 namespace BookExchange.Repositories
 {
-    public class FakeBookRepository
+    public class FakeBookRepository : IBookRepository
     {
-        public FakeBookRepository(ApplicationDbContext context)
+        public FakeBookRepository()
         {
-            _context = context;
-        }
-        private readonly ApplicationDbContext _context;
-
-        public List<Book> Books
-        {
-            get
+          
+            AppUser appUser = new AppUser
             {
-                return _context.Books.Include(b => b.appUser).ToList();
-            }
+                Id ="E52B8D8B-0914-4BF0-AC75-C48B1043E3AB",
+                FirstName="Misty",
+                LastName="Bragg",
+                UserName="Misty@test.com"
+            };
+            Book rain = new Book
+            {
+                Title="Rain",
+                Author="Test Author",
+                Format="Paperback",
+                PubYear=DateTime.Parse("1/30/1996"),
+                ImageUrl="OIP[1].jpg",
+                appUser=appUser
+            };
+            Books.Add(rain);
         }
 
-        public void AddBook(Book Book)
-        {
-            _context.Books.Add(Book);
-            _context.SaveChanges();
-        }
+        public List<Book> Books => throw new NotImplementedException();
 
-
-        public Book GetBookById(int bookId)
+        public void AddBook(Book book)
         {
-            Book book = Books.Find(b => b.BookId == bookId);
-            return book;
-        }
-
-        public void UpdateBook(Book book)
-        {
-            _context.Update(book);
-            _context.SaveChanges();
+            throw new NotImplementedException();
         }
 
         public void DeleteBook(Book book)
         {
-            _context.Books.Remove(book);
-            _context.SaveChanges();
+            throw new NotImplementedException();
+        }
+
+        public Book GetBookById(int bookId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateBook(Book book)
+        {
+            throw new NotImplementedException();
+        }
+        public List<Book> GetMyBooks(string appUserId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
