@@ -22,16 +22,15 @@ namespace BookExchange.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-        private readonly ApplicationDbContext _context;
+       //private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
                 IBookRepository repo; //= new FakeMessageRepository();
        
 
-        public BookController(ApplicationDbContext context, UserManager<AppUser> userManager,
+        public BookController(UserManager<AppUser> userManager,
                                 SignInManager<AppUser> signInManager, IWebHostEnvironment webHostEnvironment,
                                 IBookRepository r)
         {
-            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _webHostEnvironment = webHostEnvironment;
@@ -47,16 +46,10 @@ namespace BookExchange.Controllers
         }
 
         // GET: Book/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var book = await _context.Books
-                .Include(b => b.appUser)
-                .FirstOrDefaultAsync(m => m.BookId == id);
+            var book = repo.GetBookById(id);
+               
             if (book == null)
             {
                 return NotFound();
@@ -70,22 +63,21 @@ namespace BookExchange.Controllers
         {
             var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
             var currentUserId = currentUser.Id;
-            
-            var books = _context.Books.Include(b => b.appUser).Where(b => b.appUserId == currentUserId);
-            return View(await books.ToListAsync());
+
+            var books = repo.GetMyBooks(currentUserId);
+            return View(books);
 
         }
 
         // GET: Book/Create
         public IActionResult Create()
         {
-            ViewData["appUserId"] = new SelectList(_context.Set<AppUser>(), "Id", "Id");
+            //ViewData["appUserId"] = new SelectList(_context.Set<AppUser>(), "Id", "Id");
             return View();
         }
 
         // POST: Book/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+ 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateBookViewModel model)
@@ -111,36 +103,29 @@ namespace BookExchange.Controllers
                 };
                 var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
                 book.appUserId = currentUser.Id;
-                _context.Add(book);
-                await _context.SaveChangesAsync();
+                repo.AddBook(book);
                 return RedirectToAction(nameof(Index));
             }                       
             return View(model);
         }
 
-        // GET: Book/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: Book/Edit
+        public IActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var book = await _context.Books.FindAsync(id);
+          
+            var book = repo.GetBookById(id);
             if (book == null)
             {
                 return NotFound();
             }
-            ViewData["appUserId"] = new SelectList(_context.Set<AppUser>(), "Id", "Id", book.appUserId);
             return View(book);
         }
 
-        // POST: Book/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Book/Edit
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BookId,Title,Author,Format,PubYear,Condition,ImageUrl")] Book book)
+        public IActionResult Edit(int id, [Bind("BookId,Title,Author,Format,PubYear,Condition,ImageUrl")] Book book)
         {
             if (id != book.BookId)
             {
@@ -151,8 +136,8 @@ namespace BookExchange.Controllers
             {
                 try
                 {
-                    _context.Update(book);
-                    await _context.SaveChangesAsync();
+                    repo.UpdateBook(book);
+                  
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -167,21 +152,15 @@ namespace BookExchange.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["appUserId"] = new SelectList(_context.Set<AppUser>(), "Id", "Id", book.appUserId);
+          
             return View(book);
         }
 
-        // GET: Book/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: Book/Delete
+        public IActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var book = await _context.Books
-                .Include(b => b.appUser)
-                .FirstOrDefaultAsync(m => m.BookId == id);
+            var book = repo.GetBookById(id);              
             if (book == null)
             {
                 return NotFound();
@@ -190,20 +169,19 @@ namespace BookExchange.Controllers
             return View(book);
         }
 
-        // POST: Book/Delete/5
+        // POST: Book/Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var book = await _context.Books.FindAsync(id);
-            _context.Books.Remove(book);
-            await _context.SaveChangesAsync();
+            var book = repo.GetBookById(id);
+            repo.DeleteBook(book);           
             return RedirectToAction(nameof(Index));
         }
-
         private bool BookExists(int id)
         {
-            return _context.Books.Any(e => e.BookId == id);
+            return repo.Books.Any(e => e.BookId == id);
         }
+      
     }
 }
