@@ -114,34 +114,59 @@ namespace BookExchange.Controllers
         {
           
             var book = repo.GetBookById(id);
+            EditBookViewModel evm = new EditBookViewModel();
+            evm.Author = book.Author;
+            evm.BookId=book.BookId;
+            evm.Condition=book.Condition;
+            evm.Format=book.Format;
+            evm.Title=book.Title;
+            evm.PubYear=book.PubYear;
+            evm.ImageUrl=book.ImageUrl;
             if (book == null)
             {
                 return NotFound();
             }
-            return View(book);
+            return View(evm);
         }
 
         // POST: Book/Edit
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("BookId,Title,Author,Format,PubYear,Condition,ImageUrl")] Book book)
+        public async Task<IActionResult> Edit(EditBookViewModel model)
         {
-            if (id != book.BookId)
-            {
-                return NotFound();
-            }
-
+        
             if (ModelState.IsValid)
             {
                 try
                 {
+                    string uniqueFileName = null;
+                    if (model.Photo!=null)
+                    {
+                        string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "Images", "Uploads");
+                        uniqueFileName=Guid.NewGuid().ToString()+"_"+model.Photo.FileName;
+                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                        model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                    }
+                    Book book = new Book
+                    {
+                        BookId=model.BookId,
+                        Title=model.Title,
+                        Author=model.Author,
+                        Format=model.Format,
+                        PubYear=model.PubYear,
+                        Condition=model.Condition,
+                        ImageUrl=uniqueFileName
+                    };
+                    var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
+                    book.appUserId=currentUser.Id;
                     repo.UpdateBook(book);
-                  
+                    return RedirectToAction(nameof(Index));
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BookExists(book.BookId))
+                    if (!BookExists(model.BookId))
                     {
                         return NotFound();
                     }
@@ -150,10 +175,9 @@ namespace BookExchange.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
           
-            return View(book);
+            return View(model);
         }
 
         // GET: Book/Delete

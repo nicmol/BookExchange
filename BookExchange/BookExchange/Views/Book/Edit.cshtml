@@ -1,16 +1,16 @@
-﻿@model BookExchange.Models.Book
+﻿@model BookExchange.ViewModels.EditBookViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"]="Edit";
 }
-
+@{ var imagePath = "/Images/Uploads/"+(Model.ImageUrl??"OIP[1].jpg");}
 <h1>Edit</h1>
 
 <h4>Book</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form enctype="multipart/form-data"  asp-action="Edit" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="BookId" />
             <div class="form-group">
@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Format" class="control-label"></label>
-                <select sp-for="Format" class="form-control">
+                <select asp-for="Format" class="form-control">
                     <option value="Hardcover">Hardcover</option>
                     <option value="Paperback-MassMarket">Paperback-Mass Market</option>
                     <option value="Paperback-Trade">Paberback-Trade</option>
@@ -35,7 +35,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="PubYear" class="control-label"></label>
-                <input asp-for="PubYear" type ="date" class="form-control" />
+                <input asp-for="PubYear" type="date" class="form-control" />
                 <span asp-validation-for="PubYear" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -49,10 +49,17 @@
                 <span asp-validation-for="Condition" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ImageUrl" class="control-label"></label>
-                <input asp-for="ImageUrl" class="form-control" />
-                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                <label asp-for="Photo" class="control-label"></label>
+                <div class="custom-file">
+                    <input asp-for="Photo" class="form-control custom-file-input" />
+                    <label class="custom-file-label">Choose File...</label>
+                </div>
             </div>
+            <div class="col-sm-10">
+                <img src="@imagePath" class="imageDetail" />
+            </div>
+            <br/>
+            <br/>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -63,7 +70,17 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
 @section Scripts {
+    <script>
+           $(document).ready(function()
+           {
+               $('.custom-file-input').on("change", function () {
+                   var fileName = $(this).val().split("\\").pop();
+                   $(this).next('.custom-file-label').html(fileName);
+               });
+           });
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
 }
+
