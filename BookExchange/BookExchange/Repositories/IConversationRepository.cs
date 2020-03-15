@@ -16,6 +16,9 @@ namespace BookExchange.Repositories
         public List<Message> GetMessagesInConversation(int conversationId);
 
         public Conversation AddConversation(Book book, String subject);
-            
+
+        public List<Conversation> GetConversationsByUserId(string id);
+
+
     }
 }

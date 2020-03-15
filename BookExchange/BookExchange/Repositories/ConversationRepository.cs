@@ -20,7 +20,7 @@ namespace BookExchange.Repositories
         {
             get
             {
-                return _context.Conversations.Include(c => c.book).Include(c => c.Messages).ThenInclude(m => m.Sender).ToList();
+                return _context.Conversations.Include(c => c.Book).Include(c => c.Messages).ThenInclude(m => m.Sender).ToList();
             }
             
         }
@@ -35,7 +35,7 @@ namespace BookExchange.Repositories
 
         public Conversation GetConversationById(int id)
         {
-            return Conversations.Find(c => c.CoversationId==id);
+            return Conversations.Find(c => c.ConversationId==id);
         }
 
         public List<Message> GetMessagesInConversation(int conversationId)
@@ -47,13 +47,22 @@ namespace BookExchange.Repositories
         public Conversation AddConversation(Book book, String subject)
         {
             Conversation conversation = new Conversation();
-            conversation.book = book;
+            conversation.Book = book;
             conversation.Subject = subject;
             conversation.BookId = book.BookId;
             _context.Conversations.Add(conversation);
             _context.SaveChanges();
             return conversation;
               
+        }
+        public List<Conversation> GetConversationsByUserId(string id)
+        {
+            List<Conversation> conversations = _context.Conversations.FromSqlRaw
+                    ("SELECT DISTINCT c.* FROM Conversations c JOIN " +
+                    "Messages m ON m.ConversationId=c.ConversationId WHERE m.SenderId={0}", id)
+                    .Include(c => c.Book).Include(c => c.Messages).ThenInclude(m => m.Sender).ToList();
+            
+            return conversations;
         }
     }
 }

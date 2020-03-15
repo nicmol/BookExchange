@@ -1,0 +1,43 @@
+﻿@model List<Conversation>
+@{
+    ViewData["Title"]="MyConversations";
+}
+
+<h1>MyConversations</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Subject
+            </th>
+            <th>
+                Book
+            </th>
+            <th>
+               Author
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+           
+            <tr>
+                <td>
+                    <a asp-action="Conversation" asp-route-id="@item.ConversationId">
+                        @Html.DisplayFor(modelItem => item.Subject)
+                    </a>
+                   
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book.Author)
+                </td>
+           
+            </tr>
+        }
+    </tbody>
+</table>

@@ -10,15 +10,9 @@ namespace BookExchange.ViewModels
     public class StartConversationViewModel
     {
         [Required]
-        public Message Message
-        {
-            get; set;
-        }
+        public Message Message  { get; set; }
         [Required]
-        public String Subject
-        {
-            get; set;
-        }
+        public String Subject  {  get; set; }
 
     }
 }

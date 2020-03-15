@@ -11,10 +11,10 @@ namespace BookExchange.Models
     {
         public AppUser()
         {
-            //sets new user image to default image
+            //sets user image to default image
             if (ImageUrl == null)
             {
-                ImageUrl = "";
+                ImageUrl ="/Images/OIPBW8RL1UB.jpg";
             }
         }
         [Required(ErrorMessage = "You must enter a first name")]
