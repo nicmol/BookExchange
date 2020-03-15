@@ -373,3 +373,5 @@ C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\ob
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\BookExchange.dll
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\BookExchange.pdb
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\BookExchange.csprojAssemblyReference.cache
+C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\Razor\Views\Message\StartConversation.cshtml.g.cs
+C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\Razor\Views\Message\Conversation.cshtml.g.cs

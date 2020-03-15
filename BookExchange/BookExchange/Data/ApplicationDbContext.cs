@@ -17,6 +17,9 @@ namespace BookExchange.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
     public DbSet<Book> Books { get; set; }
+    public DbSet<Conversation> Conversations  { get; set; }
+    public DbSet<Message> Messages{ get; set; }
+
 
         public static async Task CreateAdminAccount(IServiceProvider serviceProvider, IConfiguration configuration)
         {

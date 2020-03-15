@@ -29,6 +29,16 @@ namespace BookExchange.Models
 
         public String appUserId { get; set; }
 
+        private List<Conversation> conversations = new List<Conversation>();
+        public List<Conversation> Conversations
+        {
+            get
+            {
+                return conversations;
+            }
+
+        }
+
       
     }
 }

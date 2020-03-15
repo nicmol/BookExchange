@@ -39,6 +39,8 @@ namespace BookExchange
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddTransient<IBookRepository, BookRepository>();
+            services.AddTransient<IMessageRepository, MessageRepository>();
+            services.AddTransient<IConversationRepository, ConversationRepository>();
 
             services.AddMvc();
                 

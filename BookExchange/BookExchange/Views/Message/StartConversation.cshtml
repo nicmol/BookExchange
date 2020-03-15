@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"]="Send";
+}
+
+@model BookExchange.ViewModels.StartConversationViewModel
+
+ 
+        <div>
+            <p>
+             Send your message here if you are interested in getting this book.
+            </p>
+        </div>
+       
+        <form asp-action="StartConversation" method="post">
+            <div asp-validation-summary="All"></div>
+            <div class="form-group">
+                <label asp-for="Subject">Subject:</label>
+                <div><span asp-validation-for="Subject"></span></div>
+                <input asp-for="Subject" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Message.MessageText">Message:</label>
+                <div><span asp-validation-for="Message.MessageText"></span></div>
+                <textarea class="form-control col-6" asp-for="Message.MessageText"></textarea><br />
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default" type="submit">Send Message</button>
+            </div>
+        </form>
+ 
+
+
