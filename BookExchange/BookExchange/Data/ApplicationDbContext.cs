@@ -1,4 +1,5 @@
 ﻿using BookExchange.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -12,20 +13,26 @@ namespace BookExchange.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+       
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-        public DbSet<Book> Books { get; set; }
+    public DbSet<Book> Books { get; set; }
+    public DbSet<Conversation> Conversations  { get; set; }
+    public DbSet<Message> Messages{ get; set; }
+
 
         public static async Task CreateAdminAccount(IServiceProvider serviceProvider, IConfiguration configuration)
         {
             UserManager<AppUser> userManager = serviceProvider.GetRequiredService<UserManager<AppUser>>();
             RoleManager<IdentityRole> roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             string username = configuration["Data:AdminUser:Name"];
-            string fullName = configuration["Data:AdminUser:FullName"];
+            string firstName = configuration["Data:AdminUser:FirstName"];
+            string lastName = configuration["Data:AdminUser:LastName"];
             string email = configuration["Data:AdminUser:Email"];
             string password = configuration["Data:AdminUser:Password"];
             string role = configuration["Data:AdminUser:Role"];
-            if (await userManager.FindByNameAsync(username) == null)
+            var adminUser = await userManager.FindByNameAsync(username);
+            if (adminUser == null)
             {
                 if (await roleManager.FindByNameAsync(role) == null)
                 {
@@ -35,7 +42,8 @@ namespace BookExchange.Data
                 {
                     UserName = username,
                     Email = email,
-                    FullName = fullName
+                    FirstName = firstName,
+                    LastName = lastName
                 };
                 IdentityResult result = await userManager.CreateAsync(user, password);
                 if (result.Succeeded)

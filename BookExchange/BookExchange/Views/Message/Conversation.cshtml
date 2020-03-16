@@ -1,0 +1,38 @@
+﻿@model Conversation
+@{
+    ViewData["Title"]="Conversation";
+}
+
+
+    <h2>@Model.Subject</h2>
+    <h4>@Model.Book.Title</h4>
+    @foreach (Message message in Model.Messages)
+    {
+        <div class="media" style="border: 1px ridge darkblue; padding: 3px;">
+            <div class="media-left">
+                <img src="~/Images/OIPBW8RL1UB.jpg" class="media-object" style="width: 50px; margin-right: 5px;" />
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">
+                    @message.Sender.FirstName @message.Sender.LastName
+                    <small><i>Posted On: @message.Date.ToString()</i></small>
+                </h4>
+                <p>
+                    @message.Sender.Email <br />
+                    @message.MessageText
+                </p>
+            </div>
+        </div>
+        
+        <br />
+        <br />
+
+    }
+   <a asp-action="AddReply" asp-route-id="@Model.ConversationId">Send a Reply</a>
+    <br />
+    <br />
+    <br />
+    <a href="/Home">Home</a>
+
+
+

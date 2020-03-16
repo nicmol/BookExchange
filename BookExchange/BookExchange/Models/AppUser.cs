@@ -11,16 +11,28 @@ namespace BookExchange.Models
     {
         public AppUser()
         {
-            //sets new user image to default image
+            //sets user image to default image
             if (ImageUrl == null)
             {
-                ImageUrl = "";
+                ImageUrl ="/Images/OIPBW8RL1UB.jpg";
             }
         }
-        [Required(ErrorMessage = "You must enter a name")]
-        public string FullName {get; set; }
+        [Required(ErrorMessage = "You must enter a first name")]
+        public String FirstName {get; set; }
+        
+        [Required(ErrorMessage = "You must enter a last name")]
+        public String LastName { get; set; }
 
-        public string ImageUrl { get; set; }
+        public String ImageUrl { get; set; }
+
+        public ICollection<Book> Books { get; set; }
+
+        public String FullName { get { return FirstName + " " + LastName; } }
+
+        public static implicit operator AppUser(string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 

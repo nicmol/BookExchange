@@ -7,102 +7,166 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BookExchange.Data;
 using BookExchange.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using BookExchange.ViewModels;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using BookExchange.Repositories;
 
 namespace BookExchange.Controllers
 {
+
     public class BookController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
+       //private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+                IBookRepository repo; //= new FakeMessageRepository();
+       
 
-        public BookController(ApplicationDbContext context)
+        public BookController(UserManager<AppUser> userManager,
+                                SignInManager<AppUser> signInManager, IWebHostEnvironment webHostEnvironment,
+                                IBookRepository r)
         {
-            _context = context;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _webHostEnvironment = webHostEnvironment;
+            repo = r;
+            
         }
 
-        // GET: Book
-        public async Task<IActionResult> Index()
+    // GET: Book
+    [Authorize]
+        public IActionResult Index()
         {
-            return View(await _context.Books.ToListAsync());
+            return View(repo.Books);
         }
 
         // GET: Book/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var book = await _context.Books
-                .FirstOrDefaultAsync(m => m.BookId == id);
+            var book = repo.GetBookById(id);
+               
             if (book == null)
             {
                 return NotFound();
             }
 
             return View(book);
+        }
+
+        //GET: Book/MyBooks
+        public async Task<IActionResult> MyBooks()
+        {
+            var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
+            var currentUserId = currentUser.Id;
+
+            var books = repo.GetMyBooks(currentUserId);
+            return View(books);
+
         }
 
         // GET: Book/Create
         public IActionResult Create()
         {
+            //ViewData["appUserId"] = new SelectList(_context.Set<AppUser>(), "Id", "Id");
             return View();
         }
 
         // POST: Book/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+ 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookId,Title,Author,Format,PubYear,Condition,ImageUrl")] Book book)
+        public async Task<IActionResult> Create(CreateBookViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(book);
-                await _context.SaveChangesAsync();
+                string uniqueFileName = null;
+                if(model.Photo != null)
+                {
+                   string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "Images", "Uploads");
+                   uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+                   string filePath =  Path.Combine(uploadsFolder, uniqueFileName);
+                   model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                }
+                Book book = new Book
+                {
+                    Title = model.Title,
+                    Author = model.Author,
+                    Format = model.Format,
+                    PubYear = model.PubYear,
+                    Condition = model.Condition,
+                    ImageUrl = uniqueFileName
+                };
+                var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
+                book.appUserId = currentUser.Id;
+                repo.AddBook(book);
                 return RedirectToAction(nameof(Index));
-            }
-            return View(book);
+            }                       
+            return View(model);
         }
 
-        // GET: Book/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: Book/Edit
+        public IActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var book = await _context.Books.FindAsync(id);
+          
+            var book = repo.GetBookById(id);
+            EditBookViewModel evm = new EditBookViewModel();
+            evm.Author = book.Author;
+            evm.BookId=book.BookId;
+            evm.Condition=book.Condition;
+            evm.Format=book.Format;
+            evm.Title=book.Title;
+            evm.PubYear=book.PubYear;
+            evm.ImageUrl=book.ImageUrl;
             if (book == null)
             {
                 return NotFound();
             }
-            return View(book);
+            return View(evm);
         }
 
-        // POST: Book/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Book/Edit
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BookId,Title,Author,Format,PubYear,Condition,ImageUrl")] Book book)
+        public async Task<IActionResult> Edit(EditBookViewModel model)
         {
-            if (id != book.BookId)
-            {
-                return NotFound();
-            }
-
+        
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(book);
-                    await _context.SaveChangesAsync();
+                    string uniqueFileName = null;
+                    if (model.Photo!=null)
+                    {
+                        string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "Images", "Uploads");
+                        uniqueFileName=Guid.NewGuid().ToString()+"_"+model.Photo.FileName;
+                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                        model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                    }
+                    Book book = new Book
+                    {
+                        BookId=model.BookId,
+                        Title=model.Title,
+                        Author=model.Author,
+                        Format=model.Format,
+                        PubYear=model.PubYear,
+                        Condition=model.Condition,
+                        ImageUrl=uniqueFileName
+                    };
+                    var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
+                    book.appUserId=currentUser.Id;
+                    repo.UpdateBook(book);
+                    return RedirectToAction(nameof(Index));
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BookExists(book.BookId))
+                    if (!BookExists(model.BookId))
                     {
                         return NotFound();
                     }
@@ -111,21 +175,16 @@ namespace BookExchange.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
-            return View(book);
+          
+            return View(model);
         }
 
-        // GET: Book/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: Book/Delete
+        public IActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var book = await _context.Books
-                .FirstOrDefaultAsync(m => m.BookId == id);
+            var book = repo.GetBookById(id);              
             if (book == null)
             {
                 return NotFound();
@@ -134,22 +193,19 @@ namespace BookExchange.Controllers
             return View(book);
         }
 
-        // POST: Book/Delete/5
+        // POST: Book/Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var book = await _context.Books.FindAsync(id);
-            _context.Books.Remove(book);
-            await _context.SaveChangesAsync();
+            var book = repo.GetBookById(id);
+            repo.DeleteBook(book);           
             return RedirectToAction(nameof(Index));
         }
-
         private bool BookExists(int id)
         {
-            return _context.Books.Any(e => e.BookId == id);
+            return repo.Books.Any(e => e.BookId == id);
         }
-
-
+      
     }
 }

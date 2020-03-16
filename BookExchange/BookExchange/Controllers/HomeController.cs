@@ -23,7 +23,7 @@ namespace BookExchange.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult HowItWorks()
         {
             return View();
         }

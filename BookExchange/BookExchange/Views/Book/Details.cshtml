@@ -3,53 +3,66 @@
 @{
     ViewData["Title"] = "Details";
 }
-
+@{ var imagePath = "/Images/Uploads/" + (Model.ImageUrl ?? "OIP[1].jpg");}
 <h1>Details</h1>
 
 <div>
     <h4>Book</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Title)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Title)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Author)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Author)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Format)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Format)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PubYear)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PubYear)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Condition)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Condition)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImageUrl)
+        <dt class="col-sm-2">
+           Cover
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ImageUrl)
-            
+            <img src="@imagePath" class="imageDetail" />
+        </dd>
+        <dt class="col-sm-2">
+            Owner
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.appUser.FullName)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.BookId">Edit</a> |
+    @if (User.Identity.Name==Model.appUser.UserName)
+    {
+        <a asp-action="Edit" asp-route-id="@Model.BookId">Edit</a> <span>|</span>
+    }
+    else
+    {
+        <a asp-controller="Message" asp-action="StartConversation" asp-route-id="@Model.BookId">Get this book</a> <span>|</span>
+    }
+
     <a asp-action="Index">Back to List</a>
 </div>

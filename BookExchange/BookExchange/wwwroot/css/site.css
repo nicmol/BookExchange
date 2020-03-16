@@ -8,7 +8,7 @@ a.navbar-brand {
 }
 /*set background image*/
 body {
-    background-image: url('/images/bookshelf.png');
+    background-image: url('/images/bookshelf_small.png');
     background-size: cover;
     /*opacity: 0.5;*/
 }
@@ -33,6 +33,9 @@ a {
     border-radius: 4px;
     padding: 5px;
     width: 50px;
+}
+.imageDetail{
+    width: 100px;
 }
 
 /* Sticky footer styles

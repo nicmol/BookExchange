@@ -12,6 +12,9 @@ using BookExchange.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using BookExchange.Models;
+using Microsoft.AspNetCore.Http;
+using BookExchange.Repositories;
 
 namespace BookExchange
 {
@@ -20,6 +23,7 @@ namespace BookExchange
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+          
         }
 
         public IConfiguration Configuration { get; }
@@ -30,10 +34,17 @@ namespace BookExchange
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddTransient<IBookRepository, BookRepository>();
+            services.AddTransient<IMessageRepository, MessageRepository>();
+            services.AddTransient<IConversationRepository, ConversationRepository>();
+
+            services.AddMvc();
+                
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +58,6 @@ namespace BookExchange
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
@@ -65,6 +75,7 @@ namespace BookExchange
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+            ApplicationDbContext.CreateAdminAccount(app.ApplicationServices, Configuration).Wait();
         }
     }
 }

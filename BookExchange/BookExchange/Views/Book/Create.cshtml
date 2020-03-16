@@ -1,4 +1,4 @@
-﻿@model BookExchange.Models.Book
+﻿@model BookExchange.ViewModels.CreateBookViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form enctype="multipart/form-data" asp-action="Create" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
@@ -24,23 +24,35 @@
             </div>
             <div class="form-group">
                 <label asp-for="Format" class="control-label"></label>
-                <input asp-for="Format" class="form-control" />
+                <select asp-for="Format" class="form-control">
+                    <option value="Hardcover">Hardcover</option>
+                    <option value="Paperback-MassMarket">Paperback-Mass Market</option>
+                    <option value="Paperback-Trade">Paberback-Trade</option>
+                    <option value="Large Print">Large Print</option>
+                </select>
                 <span asp-validation-for="Format" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PubYear" class="control-label"></label>
-                <input asp-for="PubYear" class="form-control" />
+                <input asp-for="PubYear" type="date" class="form-control" />
                 <span asp-validation-for="PubYear" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Condition" class="control-label"></label>
-                <input asp-for="Condition" class="form-control" />
+                <label asp-for="Condition" class="control-label"></label>               
+                <select asp-for="Condition" class="form-control">
+                    <option value="New">New</option>
+                    <option value="Used-Like New">Used-Like New</option>
+                    <option value="Used">Used</option>
+                    <option value="Used-Signs of Wear">Used-Signs of Wear/Writing</option>
+                </select>
                 <span asp-validation-for="Condition" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ImageUrl" class="control-label"></label>
-                <input asp-for="ImageUrl" class="form-control" />
-                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                <label asp-for="Photo" class="control-label"></label>
+                <div class="custom-file">
+                    <input asp-for="Photo" class="form-control custom-file-input" />
+                    <label class="custom-file-label">Choose File...</label>
+                </div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -54,5 +66,15 @@
 </div>
 
 @section Scripts {
+       <script>
+           $(document).ready(function()
+           {
+               $('.custom-file-input').on("change", function () {
+                   var fileName = $(this).val().split("\\").pop();
+                   $(this).next('.custom-file-label').html(fileName);
+               });
+           });
+       </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
 }

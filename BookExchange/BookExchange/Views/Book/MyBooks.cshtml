@@ -1,0 +1,76 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@model IEnumerable<BookExchange.Models.Book>
+
+@{
+    ViewData["Title"] = "My books";
+}
+
+<h1>My Bookshelf</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Format)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PubYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Condition)
+            </th>
+            <th>
+                Image
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+             var imagePath = "/Images/Uploads/" + (item.ImageUrl ?? "OIP[1].jpg");
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Format)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PubYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Condition)
+                </td>
+
+                <td>
+                    <img src="@imagePath" class="thumb" />
+                </td>
+             
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.BookId">Details</a>
+                    @if (item.appUser.UserName == User.Identity.Name)
+                    {
+                        <span>|</span> <a asp-action="Edit" asp-route-id="@item.BookId">Edit</a> <span>|</span>
+                        <a asp-action="Delete" asp-route-id="@item.BookId">Delete</a>
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
