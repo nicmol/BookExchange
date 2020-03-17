@@ -377,3 +377,4 @@ C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\ob
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\Razor\Views\Message\Conversation.cshtml.g.cs
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\Razor\Views\Message\MyConversations.cshtml.g.cs
 C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\obj\Debug\netcoreapp3.1\Razor\Views\Message\AddReply.cshtml.g.cs
+C:\Users\nsm89\OneDrive\Documents\296N\Term project\BookExchange\BookExchange\bin\Debug\netcoreapp3.1\appsettings.Production.json
